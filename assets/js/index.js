@@ -1,10 +1,11 @@
 import { Levels } from "./levels.js";
+let maps = []; // Maps triées
 
-const grid = document.getElementById("gameboard");
+const grid = document.getElementById("gameboard"); // Grille html
 
-let level = 0;
+let level = 0; // level actuel
 
-let lastRenderTime = 0;
+let lastRenderTime = 0; 
 function render(time) {
   if (time - lastRenderTime >= 16.67) { // 60fps = 16.67ms par frame
     lastRenderTime = time;
@@ -14,21 +15,17 @@ function render(time) {
 }
 
 function renderMap() {
-    const map = Levels[level];
+    const map = maps[level];
     grid.innerHTML = ""; // On vide le contenu de la grille à chaque rendu
 
-    if (hasBox(map)) { // Si la grille contient une box
-        map.forEach(row => {
-            row.forEach(col => {
-                addBlock(col);
-            });
+    map.forEach(row => {
+        row.forEach(col => {
+            addBlock(col);
         });
-    }
+    });
 }
 
-function hasBox(map) {
-    return map.some(row => row.includes(2)) // Vérifie si le tableau contient une bow
-}
+
 
 function addBlock(type) {
   switch (type) {
@@ -53,5 +50,12 @@ function addBlock(type) {
   newDiv.classList.add(type); // on y ajouter la classe en fonction de son type 
   grid.appendChild(newDiv); // on l'affiche dans la page
 }
+
+//Trie des maps si elle contiennent une box ou non
+Levels.forEach(map => {
+    if (map.some(row => row.includes(2))) {
+        maps.push(map);
+    }
+})
 
 requestAnimationFrame(render);
