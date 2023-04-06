@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&display=swap');
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: rgb(67, 67, 64);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Chivo', sans-serif;
+    color: #ffffff;
+}
+
+#gameboard {
+    display: grid;
+    grid-template-columns: repeat(10, 4vw);
+    grid-template-rows: repeat(10, 4vw);
+}
+
+#gameboard > div{
+    height: 4vw;
+    width: 4vw;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.crate {
+    background-image: url("/assets/img/crate.png");   
+}
+.wall {
+    background-image: url("/assets/img/wall2.png");   
+}
+.target {
+    background-image: url("/assets/img/target.png");   
+}
+.floor {
+    background-image: url("/assets/img/floor.png");   
+}
