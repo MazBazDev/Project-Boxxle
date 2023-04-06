@@ -19,6 +19,8 @@ body {
     display: grid;
     grid-template-columns: repeat(10, 4vw);
     grid-template-rows: repeat(10, 4vw);
+    background-image: url("/assets/img/floor.png");   
+    background-size: 50px;
 }
 
 #gameboard > div{
@@ -38,6 +40,6 @@ body {
 .target {
     background-image: url("/assets/img/target.png");   
 }
-.floor {
+/* .floor {
     background-image: url("/assets/img/floor.png");   
-}
+} */
