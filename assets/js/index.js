@@ -5,7 +5,7 @@ const grid = document.getElementById("gameboard"); // Grille html
 
 let level = 0; // level actuel
 
-let character = {
+export let Character = {
     type : "men",
     direction: "down",
     state: 0,
@@ -48,7 +48,7 @@ function addBlock(type) {
       type = "crate";
       break;
     case 3:
-      newDiv.style.backgroundImage = `url('/assets/img/character/${character.type}/${character.direction}/${character.state}.png')`; // modification du personnage en fonction de son objet
+      newDiv.style.backgroundImage = `url('/assets/img/character/${Character.type}/${Character.direction}/${Character.state}.png')`; // modification du personnage en fonction de son objet
       break;
     case 4:
       type = "target";
