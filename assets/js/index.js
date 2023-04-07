@@ -1,42 +1,63 @@
-import { Levels } from "./levels.js";
-let maps = []; // Maps triées
+import { Character } from "./classes/Character.js";
+import { Game } from "./classes/Game.js";
 
 const grid = document.getElementById("gameboard"); // Grille html
 
-let level = 0; // level actuel
+const character = new Character();
+const game = new Game(character);
 
-export let Character = {
-    type : "men",
-    direction: "down",
-    state: 0,
-    steps: 0,
-}
+// function invertObject(object) {
+//   const newObject = {};
+//   for (let key in object) {
+//     newObject[object[key]] = key;
+//   }
+//   return newObject;
+// }
 
-let lastRenderTime = 0; 
+document.addEventListener('keydown', (event) => {
+  const key = event.key.toLowerCase()
+  if(Object.values(game.keys).includes(key)) {
+    if (key == game.keys.up) character.goUp(game.map);
+    if (key == game.keys.down) character.goDown(game.map);
+    if (key == game.keys.left) character.goLeft(game.map);
+    if (key == game.keys.right) character.goRight(game.map);
+  }
+}, false);
+
 function render(time) {
-  if (time - lastRenderTime >= 16.67) { // 60fps = 16.67ms par frame
-    lastRenderTime = time;
+  if (time - game.lastRenderTime >= 16.67) { // 60fps = 16.67ms par frame
+    game.lastRenderTime = time;
     renderMap();
   }
   requestAnimationFrame(render);
 }
 
-function renderMap() {
-    const map = maps[level];
-    grid.innerHTML = ""; // On vide le contenu de la grille à chaque rendu
-
-    map.forEach(row => {
-        row.forEach(col => {
-            addBlock(col);
-        });
-    });
+function compareArrays(a,b) {
+  return JSON.stringify(a) == JSON.stringify(b)
 }
 
+function isTarget(cellule, targets) {
+  for(let target of targets) {
+    if(compareArrays(cellule, target)) return true
+  }
+  return false
+}
 
+function renderMap(debug = false) {
+    game.map = game.maps[game.level];
+    grid.innerHTML = ""; // On vide le contenu de la grille à chaque rendu
 
-function addBlock(type) {
+    for(let row in game.map) {
+        for(let col in game.map[row]) {
+          if (compareArrays(character.position, [parseInt(row), parseInt(col)])) addBlock(3);
+          else if (isTarget([parseInt(row), parseInt(col)], game.targets) && game.map[row][col] != 2) addBlock(4);
+          else addBlock(game.map[row][col]);
+        };
+    };
+}
+
+export function addBlock(type) {
   const newDiv = document.createElement("div"); // On crée une div
-  
   switch (type) {
     case 0:
       type = "floor";
@@ -58,12 +79,5 @@ function addBlock(type) {
   newDiv.classList.add(type); // on y ajouter la classe en fonction de son type 
   grid.appendChild(newDiv); // on l'affiche dans la page
 }
-
-//Trie des maps si elle contiennent une box ou non
-Levels.forEach(map => {
-    if (map.some(row => row.includes(2))) {
-        maps.push(map);
-    }
-})
 
 requestAnimationFrame(render);
