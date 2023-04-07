@@ -5,8 +5,8 @@ export class Game {
     level = 0;
     lastRenderTime = 0;
     keys = {
-      up: 'w',
-      left: 'a',
+      up: 'z',
+      left: 'q',
       down: 's',
       right: 'd'
     };

@@ -6,23 +6,40 @@ const grid = document.getElementById("gameboard"); // Grille html
 const character = new Character();
 const game = new Game(character);
 
-// function invertObject(object) {
-//   const newObject = {};
-//   for (let key in object) {
-//     newObject[object[key]] = key;
-//   }
-//   return newObject;
-// }
-
-document.addEventListener('keydown', (event) => {
+document.addEventListener('keypress', (event) => {
   const key = event.key.toLowerCase()
   if(Object.values(game.keys).includes(key)) {
     if (key == game.keys.up) character.goUp(game.map);
     if (key == game.keys.down) character.goDown(game.map);
     if (key == game.keys.left) character.goLeft(game.map);
     if (key == game.keys.right) character.goRight(game.map);
-  }
+
+    if (!character.isAnimating) {
+      character.direction = character.invertObject(game.keys)[key];;
+  
+      character.isAnimating = true;
+
+      character.requestId = requestAnimationFrame(animate);
+
+    }
+  } 
 }, false);
+
+function animate() {
+  character.updateState();
+  character.requestId = requestAnimationFrame(animate);
+}
+
+document.addEventListener("keyup", function (event) {
+	if (Object.values(game.keys).includes(event.key)) {
+		character.isAnimating = false;
+
+		cancelAnimationFrame(character.requestId);
+
+		character.direction = "down";
+		character.state = 0;
+	}
+});
 
 function render(time) {
   if (time - game.lastRenderTime >= 16.67) { // 60fps = 16.67ms par frame
@@ -69,7 +86,7 @@ export function addBlock(type) {
       type = "crate";
       break;
     case 3:
-      newDiv.style.backgroundImage = `url('/assets/img/character/${Character.type}/${Character.direction}/${Character.state}.png')`; // modification du personnage en fonction de son objet
+      newDiv.style.backgroundImage = `url('/assets/img/character/${character.type}/${character.direction}/${character.state}.png')`; // modification du personnage en fonction de son objet
       break;
     case 4:
       type = "target";
