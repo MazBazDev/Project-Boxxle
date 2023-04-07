@@ -8,7 +8,7 @@ export class Character {
 	requestId;
 	updateCount = 0; // Compteur de mises à jour
 
-	constructor(type = "men", direction = "down") {
+	constructor(type = "0", direction = "down") {
 		this.setType(type);
 		this.setDirection(direction);
 	}
