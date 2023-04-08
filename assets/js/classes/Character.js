@@ -1,3 +1,5 @@
+import { game } from "../index.js";
+
 export class Character {
 	type;
 	direction;
@@ -37,7 +39,8 @@ export class Character {
 		if (map[y - 1][x] == 2) if (await this.moveBox(map, -1, 0)) return;
 
 		this.setPosition([y - 1, x]);
-		this.steps++
+		this.steps++;
+		this.walkSound();
 	}
 
 	async goDown(map) {
@@ -47,7 +50,9 @@ export class Character {
 		if (map[y + 1][x] != 0 && map[y + 1][x] != 2) return;
 		if (map[y + 1][x] == 2) if (await this.moveBox(map, 1, 0)) return;
 		this.setPosition([y + 1, x]);
-		this.steps++
+		this.steps++;
+		this.walkSound();
+
 	}
 
 	async goLeft(map) {
@@ -58,7 +63,9 @@ export class Character {
 		if (map[y][x - 1] == 2) if (await this.moveBox(map, 0, -1)) return;
 
 		this.setPosition([y, x - 1]);
-		this.steps++
+		this.steps++;
+		this.walkSound();
+
 	}
 
 	async goRight(map) {
@@ -69,7 +76,9 @@ export class Character {
 		if (map[y][x + 1] == 2) if (await this.moveBox(map, 0, 1)) return;
 
 		this.setPosition([y, x + 1]);
-		this.steps++
+		this.steps++;
+		this.walkSound();
+
 	}
 
 	async moveBox(map, verical, horizontal) {
@@ -93,7 +102,7 @@ export class Character {
 			(error) => alert(error)
 		);
 	}
-    
+
 	invertObject(object) {
 		const newObject = {};
 		for (let key in object) {
@@ -113,5 +122,12 @@ export class Character {
 				this.state = 2;
 			}
 		}
+	}
+
+	walkSound() {
+		const audio = new Audio("/assets/sounds/footStep.mp3");
+		audio.loop = false;
+		audio.volume = game.settings.volume
+		audio.play();
 	}
 }

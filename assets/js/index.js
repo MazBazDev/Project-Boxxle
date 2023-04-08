@@ -4,7 +4,7 @@ import { Game } from "./classes/Game.js";
 const grid = document.getElementById("gameboard"); // Grille html
 
 const character = new Character();
-const game = new Game(character);
+export const game = new Game(character);
 
 document.addEventListener('keypress', (event) => {
   const key = event.key.toLowerCase()

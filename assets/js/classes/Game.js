@@ -12,7 +12,10 @@ export class Game {
     };
     maps = [];
     map = [];
-    targets = []
+    targets = [];
+    settings = {
+      volume:1,
+    };
 
     constructor (character) {
         this.sortMaps();
