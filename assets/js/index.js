@@ -45,6 +45,8 @@ function render(time) {
   if (time - game.lastRenderTime >= 16.67) { // 60fps = 16.67ms par frame
     game.lastRenderTime = time;
     renderMap();
+
+    document.getElementById("steps_count").innerHTML = character.steps // Afficher les steps
   }
   requestAnimationFrame(render);
 }

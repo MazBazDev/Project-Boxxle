@@ -37,6 +37,7 @@ export class Character {
 		if (map[y - 1][x] == 2) if (await this.moveBox(map, -1, 0)) return;
 
 		this.setPosition([y - 1, x]);
+		this.steps++
 	}
 
 	async goDown(map) {
@@ -46,6 +47,7 @@ export class Character {
 		if (map[y + 1][x] != 0 && map[y + 1][x] != 2) return;
 		if (map[y + 1][x] == 2) if (await this.moveBox(map, 1, 0)) return;
 		this.setPosition([y + 1, x]);
+		this.steps++
 	}
 
 	async goLeft(map) {
@@ -56,6 +58,7 @@ export class Character {
 		if (map[y][x - 1] == 2) if (await this.moveBox(map, 0, -1)) return;
 
 		this.setPosition([y, x - 1]);
+		this.steps++
 	}
 
 	async goRight(map) {
@@ -66,6 +69,7 @@ export class Character {
 		if (map[y][x + 1] == 2) if (await this.moveBox(map, 0, 1)) return;
 
 		this.setPosition([y, x + 1]);
+		this.steps++
 	}
 
 	async moveBox(map, verical, horizontal) {
