@@ -17,13 +17,6 @@ const grid = document.getElementById("gameboard");
 export let character = new Character();
 export let game = new Game(0);
 
-let keys = {
-  up: 'z',
-  left: 'q',
-  down: 's',
-  right: 'd'
-};
-
 // Quand une touche est pressee
 document.addEventListener(
 	"keydown",
@@ -31,22 +24,22 @@ document.addEventListener(
 		// On recupere la touche en question
 		const key = event.key.toLowerCase();
 		// Si elle concerne une touche du jeu
-		if (Object.values(keys).includes(key)) {
+		if (Object.values(game.keys).includes(key)) {
 		// On deplace le personnage
 		switch (key) {
-			case keys.up: {
+			case game.keys.up: {
 			character.goUp(game.map);
 			break;
 			}
-			case keys.down: {
+			case game.keys.down: {
 			character.goDown(game.map);
 			break;
 			}
-			case keys.left: {
+			case game.keys.left: {
 			character.goLeft(game.map);
 			break;
 			}
-			case keys.right: {
+			case game.keys.right: {
 			character.goRight(game.map);
 			break;
 			}
@@ -60,7 +53,7 @@ document.addEventListener(
 		* on le fait bouger dans la bonne direction
 		*/
 		if (!character.isAnimating) {
-			character.direction = character.invertObject(keys)[key];
+			character.direction = character.invertObject(game.keys)[key];
 			character.isAnimating = true;
 			character.requestId = requestAnimationFrame(animate);
 		}
@@ -75,7 +68,7 @@ document.addEventListener("keyup", function (event) {
 	// On recupere la touche en question
 	const key = event.key.toLowerCase();
 	// Si elle concerne une touche du jeu
-	if (Object.values(keys).includes(key)) {
+	if (Object.values(game.keys).includes(key)) {
 		/*
 		* On arrete le personnage
 		* puis on le remet dans sa position initiale

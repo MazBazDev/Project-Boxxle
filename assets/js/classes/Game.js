@@ -10,6 +10,12 @@ export class Game {
 	settings = {
 		volume: 1,
 	};
+	keys = {
+		up: 'arrowup',
+		down: 'arrowdown',
+		right: 'arrowright',
+		left: 'arrowleft',
+	};
 
 	constructor(level = 0) {
 		this.level = level;
@@ -59,5 +65,9 @@ export class Game {
 		} else if (this.level == this.maps.length) {
 			alert(`You won, with ${character.steps}`);
 		}
+	}
+
+	updatekey (key, newKey) {
+		this.keys[key] = newKey;
 	}
 }
