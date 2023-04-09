@@ -70,6 +70,7 @@ function renderMap(debug = false) {
         for(let col in game.map[row]) {
           if (compareArrays(character.position, [parseInt(row), parseInt(col)])) addBlock(3);
           else if (isTarget([parseInt(row), parseInt(col)], game.targets) && game.map[row][col] != 2) addBlock(4);
+          else if (isTarget([parseInt(row), parseInt(col)], game.targets) && game.map[row][col] == 2) addBlock(5);
           else addBlock(game.map[row][col]);
         };
     };
@@ -92,6 +93,9 @@ export function addBlock(type) {
       break;
     case 4:
       type = "target";
+      break
+    case 5:
+        type = "good";
       break;
   }
 

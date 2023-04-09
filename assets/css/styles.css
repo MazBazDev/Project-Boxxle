@@ -40,3 +40,6 @@ body {
 .target {
     background-image: url("/assets/img/target.png");   
 }
+.good {
+    background-image: url("/assets/img/good_crate.png");   
+}
