@@ -5,6 +5,28 @@ body {
 	height: 100%;
 }
 
+/* Button container */
+button {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #212121;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	font-size: 16px;
+	line-height: 24px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+  
+/* Button hover state */
+button:hover {
+	background-color: #424242;
+}
+  
+
 body {
 	margin: 0;
 	background: #333333;
@@ -50,7 +72,7 @@ body {
 
 /* Le fond quand y'a le modal */
 .modal-background {
-	display: none;
+	display: flex;
 	position: fixed;
 	align-items: center;
 	justify-content: center;
@@ -59,7 +81,7 @@ body {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
+	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -69,8 +91,8 @@ body {
 	padding: 20px;
 	border: 1px solid #2d2d2d;
 	width: 70%;
-	min-height: 70%;
-	height: fit-content;
+	height: 70%;
+	overflow: auto;
 }
 
 .modal-header {
@@ -109,6 +131,7 @@ body {
 	height: fit-content;
 	width: fit-content;
 }
+
 /* Bouton de fermeture */
 .close {
 	color: #FF4500;
@@ -121,4 +144,77 @@ body {
 	color: #8B0000;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.modal_sub-content_footer {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.carousel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.carousel-window {
+	overflow: hidden;
+	width: 40%;
+	height: 75%;
+}
+  
+.carousel-slide {
+  	display: flex;
+  	width: 100%;
+  	height: 100%;
+	overflow: unset;
+}
+
+.carousel-slide img {
+  	width: 100%;
+  	height: 100%;
+  	object-fit: cover;
+}
+
+.prev,
+.next {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #212121;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 24px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+  
+/* Button hover state */
+.prev:hover,
+.next:hover {
+	background-color: #424242;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 100vmax;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.5);
 }

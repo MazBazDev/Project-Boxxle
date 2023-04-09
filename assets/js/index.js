@@ -191,6 +191,7 @@ let modal = document.getElementById("settings");
 let btn = document.getElementById("settingsButton");
 let span = document.getElementsByClassName("close")[0];
 let changeKeyFields = document.querySelectorAll(".change-key");
+let chooseCharacter = document.querySelectorAll(".choose-character")[0];
 
 // Quand le boutton "ouvrir les parametres" est trigger
 btn.onclick = function () {
@@ -239,6 +240,10 @@ for (let changeKeyField of changeKeyFields) {
 
 }
 
+chooseCharacter.onclick = function() {
+	character.type = slideIndex
+}
+
 // Quand on clique sur la croix
 span.onclick = function () {
 	// Cacher les parametres
@@ -252,3 +257,37 @@ window.onclick = function (event) {
 		modal.style.display = "none";
 	}
 };
+
+let slideIndex = 0;
+const carouselSlide = document.querySelector('.carousel-slide');
+const slides = document.querySelectorAll('.carousel-slide img');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const slideWidth = slides[0].clientWidth;
+
+// Set the first slide to be visible
+carouselSlide.style.transform = `translateX(-${slideWidth * (slideIndex)}px)`;
+
+// Move to the previous slide
+export function prevSlide() {
+  if (slideIndex < 0) {
+    return;
+  }
+  slideIndex--;
+  carouselSlide.style.transition = "transform 0.4s ease-in-out";
+  carouselSlide.style.transform = `translateX(-${slideWidth * (slideIndex)}px)`;
+}
+
+// Move to the next slide
+export function nextSlide() {
+  if (slideIndex >= slides.length -1) {
+    return;
+  }
+  slideIndex++;
+  carouselSlide.style.transition = "transform 0.4s ease-in-out";
+  carouselSlide.style.transform = `translateX(-${slideWidth * (slideIndex)}px)`;
+}
+
+// Add event listeners to the prev/next buttons
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
