@@ -2,6 +2,14 @@
 import { Character } from "./classes/Character.js";
 import { Game } from "./classes/Game.js";
 
+// Paramettres par defauts
+const defaultKeys = {
+	up: 'arrowup',
+	down: 'arrowdown',
+	right: 'arrowright',
+	left: 'arrowleft',
+}
+
 // Grille html
 const grid = document.getElementById("gameboard");
 
@@ -177,3 +185,70 @@ export function addBlock(type) {
 }
 
 requestAnimationFrame(render);
+
+// Recuperation des elements HTML pour les parametres
+let modal = document.getElementById("settings");
+let btn = document.getElementById("settingsButton");
+let span = document.getElementsByClassName("close")[0];
+let changeKeyFields = document.querySelectorAll(".change-key");
+
+// Quand le boutton "ouvrir les parametres" est trigger
+btn.onclick = function () {
+	//Afficher les parametres
+	modal.style.display = "flex";
+};
+
+// Recupere la premiere touche presse 
+// modifie le personnage et l'affichage
+// puis supprime le listener
+function waitNewKey(event) {
+	const newKey = event.key;
+	const changeKeyField = document.getElementById(event.currentTarget.changingKey);
+	const text = changeKeyField.getElementsByClassName('text')[0];
+
+	game.updatekey(changeKeyField.id, newKey);
+	text.innerHTML = newKey + ' 📝';
+	document.removeEventListener('keydown', waitNewKey)
+}
+
+// Configure toutes les ecoutes
+for (let changeKeyField of changeKeyFields) {
+	const switchDefaultButton = changeKeyField.getElementsByTagName('button')[0];
+	const text = changeKeyField.getElementsByClassName('text')[0];
+	
+	// Initialise la valeur du text a la valeur actuelle
+	text.innerHTML = game.keys[changeKeyField.id] + ' 📝';
+	text.onclick = function () {
+		// Affiche "waiting ..." en attendant l'entree de l'utilisateur
+		text.innerHTML = "Waiting ..."
+		// Configure le listener
+		document.addEventListener("keydown", waitNewKey);
+		// Ajoute la direction en cours de modification au document 
+		// (impossible de mettres des args dans la fonction du listener)
+		document.changingKey = changeKeyField.id
+	}
+
+	// Remets les valeurs par defaut quand le bouton est appuye
+	switchDefaultButton.onclick = function () {
+		const defaultKey = defaultKeys[changeKeyField.id];
+
+		game.updatekey(parent.id, defaultKey);
+		text.innerHTML = defaultKey + ' 📝';
+	}
+
+
+}
+
+// Quand on clique sur la croix
+span.onclick = function () {
+	// Cacher les parametres
+	modal.style.display = "none";
+};
+
+// Quand on clique ailleurs que sur le modal
+window.onclick = function (event) {
+	if (event.target == modal) {
+		// Cacher les parametres
+		modal.style.display = "none";
+	}
+};

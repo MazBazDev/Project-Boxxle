@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Boxxle</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
@@ -11,6 +12,49 @@
     
 </body>
 <body>
+    <!-- Bouton parametres -->
+    <button id="settingsButton">Open settings</button>
+
+    <!-- Parametres -->
+    <div id="settings" class="modal-background">
+        <div class="modal">
+            <div class="modal-header">
+                <h1>Paramètres</h1>
+                <span class="close">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-content">
+                <div id="keys" class="modal-sub_content">
+                    <h2>Touches</h2>
+                    <div class="change-key" id="up">
+                        <h4>Haut:</h4>
+                        <p class="text"></p>
+                        <button class="defaultButton">default</button>
+                    </div>
+                    <div class="change-key" id="left">
+                        <h4>Gauche:</h4>
+                        <p class="text"></p>
+                        <button class="defaultButton">default</button>
+                    </div>
+                    <div class="change-key" id="down">
+                        <h4>Bas:</h4>
+                        <p class="text"></p>
+                        <button class="defaultButton">default</button>
+                    </div>
+                    <div class="change-key" id="right">
+                        <h4>Droite:</h4>
+                        <p class="text"></p>
+                        <button class="defaultButton">default</button>
+                    </div>
+                </div>
+                <div id="skin" class="modal-sub_content">
+                    <h2>Skin</h2>
+                    <div class="carroussel"></div>
+                </div>
+            </div>
+          </div>
+    </div>
+
     <!-- Compteur de pas -->
     <div id="steps_count"></div>
 
