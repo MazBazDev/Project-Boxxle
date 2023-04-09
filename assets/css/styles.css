@@ -72,7 +72,7 @@ body {
 
 /* Le fond quand y'a le modal */
 .modal-background {
-	display: flex;
+	display: none;
 	position: fixed;
 	align-items: center;
 	justify-content: center;
