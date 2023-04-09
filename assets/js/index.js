@@ -3,8 +3,8 @@ import { Game } from "./classes/Game.js";
 
 const grid = document.getElementById("gameboard"); // Grille html
 
-const character = new Character();
-export const game = new Game(character);
+export let character = new Character();
+export let game = new Game(0);
 
 let keys = {
   up: 'z',
@@ -45,6 +45,8 @@ document.addEventListener("keyup", function (event) {
 
 		character.direction = "down";
 		character.state = 0;
+
+    game.changeMap();
 	}
 });
 
@@ -69,8 +71,7 @@ function isTarget(cellule, targets) {
   return false
 }
 
-function renderMap(debug = false) {
-    game.map = game.maps[game.level];
+function renderMap() {
     grid.innerHTML = ""; // On vide le contenu de la grille à chaque rendu
 
     for(let row in game.map) {

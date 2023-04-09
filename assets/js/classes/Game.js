@@ -1,8 +1,8 @@
 import { Levels } from "../levels.js";
-import { addBlock } from "../index.js"
+import { addBlock, character } from "../index.js"
 
 export class Game {
-    level = 0;
+    level;
     lastRenderTime = 0;
     maps = [];
     map = [];
@@ -11,9 +11,10 @@ export class Game {
       volume:1,
     };
 
-    constructor (character) {
+    constructor (level = 0) {
+        this.level = level
         this.sortMaps();
-        this.initRound(character);
+        this.initRound();
     };
 
     sortMaps() {
@@ -24,9 +25,9 @@ export class Game {
         })
     }
 
-    initRound(character) {
+    initRound() {
         this.map = this.maps[this.level];
-      
+
         for(let row in this.map) {
             for(let col in this.map[row]) {
                 if(this.map[row][col] == 3) {
@@ -42,5 +43,16 @@ export class Game {
               else addBlock(this.map[row][col]);
             };
         };
+    }
+
+    changeMap() {
+      if (document.querySelectorAll(".good").length == this.targets.length && this.level < this.maps.length) {
+        this.map = [];
+        this.targets = [];
+        this.level ++
+        this.initRound() 
+      } else if (this.level == this.maps.length) {
+        alert(`You won, with ${character.steps}`)
+      }
     }
 }
