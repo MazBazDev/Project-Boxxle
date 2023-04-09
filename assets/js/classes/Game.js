@@ -17,24 +17,27 @@ export class Game {
         this.initRound();
     };
 
-    sortMaps() {
-        Levels.forEach(map => {
-            if (map.some(row => row.includes(2))) {
-                this.maps.push(map);
-            }
-        })
-    }
+	// On retire les maps qui ne contienne pas de boites
+	sortMaps() {
+		Levels.forEach((map) => {
+		if (map.some((row) => row.includes(2))) {
+			this.maps.push(map);
+		}
+		});
+	}
 
     initRound() {
         this.map = this.maps[this.level];
-
+// On charge la bonne map et on vide les cibles
         for(let row in this.map) {
             for(let col in this.map[row]) {
+					// Si on tombe sir le presonnage on le retire de la carte et stoque sa position dans l'objet personnage
                 if(this.map[row][col] == 3) {
                   character.setPosition([parseInt(row), parseInt(col)]); 
                   this.map[row][col] = 0
                   addBlock(3);
                 }
+				// si on tombe sur une cible on la retire de  la carte et la stock parmis les cibles
                 if(this.map[row][col] == 4) {
                   this.targets.push([parseInt(row), parseInt(col)]); 
                   this.map[row][col] = 0
