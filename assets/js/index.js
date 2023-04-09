@@ -232,7 +232,7 @@ for (let changeKeyField of changeKeyFields) {
 	switchDefaultButton.onclick = function () {
 		const defaultKey = defaultKeys[changeKeyField.id];
 
-		game.updatekey(parent.id, defaultKey);
+		game.updatekey(changeKeyField.id, defaultKey);
 		text.innerHTML = defaultKey + ' 📝';
 	}
 
