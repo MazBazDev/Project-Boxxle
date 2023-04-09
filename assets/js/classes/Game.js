@@ -4,12 +4,6 @@ import { addBlock } from "../index.js"
 export class Game {
     level = 0;
     lastRenderTime = 0;
-    keys = {
-      up: 'z',
-      left: 'q',
-      down: 's',
-      right: 'd'
-    };
     maps = [];
     map = [];
     targets = [];

@@ -6,16 +6,23 @@ const grid = document.getElementById("gameboard"); // Grille html
 const character = new Character();
 export const game = new Game(character);
 
+let keys = {
+  up: 'z',
+  left: 'q',
+  down: 's',
+  right: 'd'
+};
+
 document.addEventListener('keypress', (event) => {
   const key = event.key.toLowerCase()
-  if(Object.values(game.keys).includes(key)) {
-    if (key == game.keys.up) character.goUp(game.map);
-    if (key == game.keys.down) character.goDown(game.map);
-    if (key == game.keys.left) character.goLeft(game.map);
-    if (key == game.keys.right) character.goRight(game.map);
+  if(Object.values(keys).includes(key)) {
+    if (key == keys.up) character.goUp(game.map);
+    if (key == keys.down) character.goDown(game.map);
+    if (key == keys.left) character.goLeft(game.map);
+    if (key == keys.right) character.goRight(game.map);
 
     if (!character.isAnimating) {
-      character.direction = character.invertObject(game.keys)[key];;
+      character.direction = character.invertObject(keys)[key];;
   
       character.isAnimating = true;
 
@@ -31,7 +38,7 @@ function animate() {
 }
 
 document.addEventListener("keyup", function (event) {
-	if (Object.values(game.keys).includes(event.key)) {
+	if (Object.values(keys).includes(event.key)) {
 		character.isAnimating = false;
 
 		cancelAnimationFrame(character.requestId);
