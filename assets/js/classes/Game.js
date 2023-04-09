@@ -1,5 +1,6 @@
 import { Levels } from "../levels.js";
-import { addBlock, character } from "../index.js";
+import { addBlock, character, game } from "../index.js";
+import { Character } from "./Character.js";
 
 export class Game {
 	level;
@@ -19,9 +20,11 @@ export class Game {
 
 	// On retire les maps qui ne contienne pas de boites
 	sortMaps() {
-		Levels.forEach((map) => {
+		Levels.forEach((Level) => {
+			var map = [];
+			for (let row of Level) map.push([...row]);
 			if (map.some((row) => row.includes(2))) {
-				this.maps.push(map);
+				this.maps.push([...map]);
 			}
 		});
 	}

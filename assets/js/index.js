@@ -176,4 +176,8 @@ export function addBlock(type) {
 	grid.appendChild(newDiv);
 }
 
+document.getElementById("reset").addEventListener("click", () => {
+  game = new Game(game.level);
+});
+
 requestAnimationFrame(render);
