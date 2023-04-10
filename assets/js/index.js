@@ -315,7 +315,7 @@ function konamiCodeDetector(event) {
   konamiCode.splice(-konamiSequence.length - 1, konamiCode.length - konamiSequence.length); // Supprime les touches en trop
   
   if (konamiCode.join() === konamiSequence.join()) { // Vérifie si la séquence est complète
-	window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+	window.open("https://www.youtube.com/watch?v=xvFZjo5PgG0")
   }
 }
-document.addEventListener("keydown", konamiCodeDetector); 
+document.addEventListener("keyup", konamiCodeDetector); 
