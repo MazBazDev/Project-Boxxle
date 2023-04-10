@@ -2,19 +2,20 @@
 import { Character } from "./classes/Character.js";
 import { Game } from "./classes/Game.js";
 
+// Paramettres par defauts
+const defaultKeys = {
+	up: 'arrowup',
+	down: 'arrowdown',
+	right: 'arrowright',
+	left: 'arrowleft',
+}
+
 // Grille html
 const grid = document.getElementById("gameboard");
 
 // On initialise le personnage et la partie
 export let character = new Character();
 export let game = new Game(0);
-
-let keys = {
-  up: 'z',
-  left: 'q',
-  down: 's',
-  right: 'd'
-};
 
 // Quand une touche est pressee
 document.addEventListener(
@@ -23,22 +24,22 @@ document.addEventListener(
 		// On recupere la touche en question
 		const key = event.key.toLowerCase();
 		// Si elle concerne une touche du jeu
-		if (Object.values(keys).includes(key)) {
+		if (Object.values(game.keys).includes(key)) {
 		// On deplace le personnage
 		switch (key) {
-			case keys.up: {
+			case game.keys.up: {
 			character.goUp(game.map);
 			break;
 			}
-			case keys.down: {
+			case game.keys.down: {
 			character.goDown(game.map);
 			break;
 			}
-			case keys.left: {
+			case game.keys.left: {
 			character.goLeft(game.map);
 			break;
 			}
-			case keys.right: {
+			case game.keys.right: {
 			character.goRight(game.map);
 			break;
 			}
@@ -52,7 +53,7 @@ document.addEventListener(
 		* on le fait bouger dans la bonne direction
 		*/
 		if (!character.isAnimating) {
-			character.direction = character.invertObject(keys)[key];
+			character.direction = character.invertObject(game.keys)[key];
 			character.isAnimating = true;
 			character.requestId = requestAnimationFrame(animate);
 		}
@@ -67,7 +68,7 @@ document.addEventListener("keyup", function (event) {
 	// On recupere la touche en question
 	const key = event.key.toLowerCase();
 	// Si elle concerne une touche du jeu
-	if (Object.values(keys).includes(key)) {
+	if (Object.values(game.keys).includes(key)) {
 		/*
 		* On arrete le personnage
 		* puis on le remet dans sa position initiale
@@ -181,3 +182,109 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 requestAnimationFrame(render);
+
+// Recuperation des elements HTML pour les parametres
+let modal = document.getElementById("settings");
+let btn = document.getElementById("settingsButton");
+let span = document.getElementsByClassName("close")[0];
+let changeKeyFields = document.querySelectorAll(".change-key");
+let chooseCharacter = document.querySelectorAll(".choose-character")[0];
+
+// Quand le boutton "ouvrir les parametres" est trigger
+btn.onclick = function () {
+	//Afficher les parametres
+	modal.style.display = "flex";
+};
+
+// Recupere la premiere touche presse 
+// modifie le personnage et l'affichage
+// puis supprime le listener
+function waitNewKey(event) {
+	const newKey = event.key;
+	const changeKeyField = document.getElementById(event.currentTarget.changingKey);
+	const text = changeKeyField.getElementsByClassName('text')[0];
+
+	game.updatekey(changeKeyField.id, newKey);
+	text.innerHTML = newKey + ' 📝';
+	document.removeEventListener('keydown', waitNewKey)
+}
+
+// Configure toutes les ecoutes
+for (let changeKeyField of changeKeyFields) {
+	const switchDefaultButton = changeKeyField.getElementsByTagName('button')[0];
+	const text = changeKeyField.getElementsByClassName('text')[0];
+	
+	// Initialise la valeur du text a la valeur actuelle
+	text.innerHTML = game.keys[changeKeyField.id] + ' 📝';
+	text.onclick = function () {
+		// Affiche "waiting ..." en attendant l'entree de l'utilisateur
+		text.innerHTML = "Waiting ..."
+		// Configure le listener
+		document.addEventListener("keydown", waitNewKey);
+		// Ajoute la direction en cours de modification au document 
+		// (impossible de mettres des args dans la fonction du listener)
+		document.changingKey = changeKeyField.id
+	}
+
+	// Remets les valeurs par defaut quand le bouton est appuye
+	switchDefaultButton.onclick = function () {
+		const defaultKey = defaultKeys[changeKeyField.id];
+
+		game.updatekey(changeKeyField.id, defaultKey);
+		text.innerHTML = defaultKey + ' 📝';
+	}
+
+
+}
+
+chooseCharacter.onclick = function() {
+	character.type = slideIndex
+}
+
+// Quand on clique sur la croix
+span.onclick = function () {
+	// Cacher les parametres
+	modal.style.display = "none";
+};
+
+// Quand on clique ailleurs que sur le modal
+window.onclick = function (event) {
+	if (event.target == modal) {
+		// Cacher les parametres
+		modal.style.display = "none";
+	}
+};
+
+let slideIndex = 0;
+const carouselSlide = document.querySelector('.carousel-slide');
+const slides = document.querySelectorAll('.carousel-slide img');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const slideWidth = slides[0].clientWidth;
+
+// Set the first slide to be visible
+carouselSlide.style.transform = `translateX(-${slideWidth * (slideIndex)}px)`;
+
+// Move to the previous slide
+export function prevSlide() {
+  if (slideIndex < 0) {
+    return;
+  }
+  slideIndex--;
+  carouselSlide.style.transition = "transform 0.4s ease-in-out";
+  carouselSlide.style.transform = `translateX(-${slideWidth * (slideIndex)}px)`;
+}
+
+// Move to the next slide
+export function nextSlide() {
+  if (slideIndex >= slides.length -1) {
+    return;
+  }
+  slideIndex++;
+  carouselSlide.style.transition = "transform 0.4s ease-in-out";
+  carouselSlide.style.transform = `translateX(-${slideWidth * (slideIndex)}px)`;
+}
+
+// Add event listeners to the prev/next buttons
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);

@@ -5,9 +5,31 @@ body {
 	height: 100%;
 }
 
+/* Button container */
+button {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #212121;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	font-size: 16px;
+	line-height: 24px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+  
+/* Button hover state */
+button:hover {
+	background-color: #424242;
+}
+  
+
 body {
 	margin: 0;
-	background: rgb(67, 67, 64);
+	background: #333333;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -48,50 +70,151 @@ body {
 	background-image: url("/assets/img/good_crate.png");
 }
 
-/* The Modal (background) */
-.modal {
+/* Le fond quand y'a le modal */
+.modal-background {
 	display: none;
-	/* Hidden by default */
 	position: fixed;
-	/* Stay in place */
+	align-items: center;
+	justify-content: center;
 	z-index: 1;
-	/* Sit on top */
 	left: 0;
 	top: 0;
 	width: 100%;
-	/* Full width */
 	height: 100%;
-	/* Full height */
-	overflow: auto;
-	/* Enable scroll if needed */
-	background-color: rgb(0, 0, 0);
-	/* Fallback color */
+	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.4);
-	/* Black w/ opacity */
 }
 
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto;
-	/* 15% from the top and centered */
+.modal {
+	font-family: "Chivo", sans-serif;
+	background-color: #292929;
 	padding: 20px;
-	border: 1px solid #888;
-	width: 80%;
-	/* Could be more or less, depending on screen size */
+	border: 1px solid #2d2d2d;
+	width: 70%;
+	height: 70%;
+	overflow: auto;
 }
 
-/* The Close Button */
+.modal-header {
+	display: flex;
+	padding-left: 5%;
+	padding-right: 5%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* Contenu du modal */
+.modal-content {
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.change-key {
+	display: flex;
+	flex-direction: row;
+	padding-left: 5%;
+	padding-right: 5%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.change-key > h4 {
+	width: 15%;
+}
+
+.text:hover {
+	cursor: pointer;
+}
+
+.defaultButton {
+	height: fit-content;
+	width: fit-content;
+}
+
+/* Bouton de fermeture */
 .close {
-	color: #aaa;
+	color: #FF4500;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
-	color: black;
+	color: #8B0000;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.modal_sub-content_footer {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.carousel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.carousel-window {
+	overflow: hidden;
+	width: 40%;
+	height: 75%;
+}
+  
+.carousel-slide {
+  	display: flex;
+  	width: 100%;
+  	height: 100%;
+	overflow: unset;
+}
+
+.carousel-slide img {
+  	width: 100%;
+  	height: 100%;
+  	object-fit: cover;
+}
+
+.prev,
+.next {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #212121;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 24px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+  
+/* Button hover state */
+.prev:hover,
+.next:hover {
+	background-color: #424242;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 100vmax;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.5);
 }
