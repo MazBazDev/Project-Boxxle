@@ -1,5 +1,5 @@
 import { Levels } from "../levels.js";
-import { addBlock, character} from "../index.js";
+import { addBlock, character, restart} from "../index.js";
 
 export class Game {
 	level;
@@ -9,16 +9,27 @@ export class Game {
 	targets = [];
 	settings = {
 		volume: 1,
+		keys : {
+			default: {
+				up: 'arrowup',
+				down: 'arrowdown',
+				right: 'arrowright',
+				left: 'arrowleft',
+			},
+			up: 'arrowup',
+			down: 'arrowdown',
+			right: 'arrowright',
+			left: 'arrowleft',
+		}
 	};
-	keys = {
-		up: 'arrowup',
-		down: 'arrowdown',
-		right: 'arrowright',
-		left: 'arrowleft',
-	};
+	
 
-	constructor(level = 0, reset = false) {
+	constructor(level = 0, reset = false, settings) {
 		this.level = level;
+		if (settings) {
+			this.settings = settings;
+		}
+
 		this.sortMaps(reset);
 		this.initRound();
 	}
@@ -77,10 +88,11 @@ export class Game {
 				`You finished all levels, in ${character.steps} steps`,
 				'Restart !',
 			);
+			restart()
 		}
 	}
 
 	updatekey (key, newKey) {
-		this.keys[key] = newKey;
+		this.settings.keys[key] = newKey;
 	}
 }

@@ -1,13 +1,6 @@
 // On charge les class Personnage et Partie
 import { Character } from "./classes/Character.js";
 import { Game } from "./classes/Game.js";
-// Paramettres par defauts
-const defaultKeys = {
-	up: 'arrowup',
-	down: 'arrowdown',
-	right: 'arrowright',
-	left: 'arrowleft',
-}
 
 // Grille html
 const grid = document.getElementById("gameboard");
@@ -23,22 +16,22 @@ document.addEventListener(
 		// On recupere la touche en question
 		const key = event.key.toLowerCase();
 		// Si elle concerne une touche du jeu
-		if (Object.values(game.keys).includes(key)) {
+		if (Object.values(game.settings.keys).includes(key)) {
 		// On deplace le personnage
 		switch (key) {
-			case game.keys.up: {
+			case game.settings.keys.up: {
 			character.goUp(game.map);
 			break;
 			}
-			case game.keys.down: {
+			case game.settings.keys.down: {
 			character.goDown(game.map);
 			break;
 			}
-			case game.keys.left: {
+			case game.settings.keys.left: {
 			character.goLeft(game.map);
 			break;
 			}
-			case game.keys.right: {
+			case game.settings.keys.right: {
 			character.goRight(game.map);
 			break;
 			}
@@ -52,7 +45,7 @@ document.addEventListener(
 		* on le fait bouger dans la bonne direction
 		*/
 		if (!character.isAnimating) {
-			character.direction = character.invertObject(game.keys)[key];
+			character.direction = character.invertObject(game.settings.keys)[key];
 			character.isAnimating = true;
 			character.requestId = requestAnimationFrame(animate);
 		}
@@ -67,7 +60,7 @@ document.addEventListener("keyup", function (event) {
 	// On recupere la touche en question
 	const key = event.key.toLowerCase();
 	// Si elle concerne une touche du jeu
-	if (Object.values(game.keys).includes(key)) {
+	if (Object.values(game.settings.keys).includes(key)) {
 		/*
 		* On arrete le personnage
 		* puis on le remet dans sa position initiale
@@ -177,8 +170,13 @@ export function addBlock(type) {
 }
 
 document.getElementById("reset").addEventListener("click", () => {
-  game = new Game(game.level, true);
+  game = new Game(game.level, true, game.settings);
 });
+
+export function restart() {
+	character = new Character(character.type);
+	game = new Game(0, false, game.settings);
+}
 
 requestAnimationFrame(render);
 
@@ -213,7 +211,7 @@ for (let changeKeyField of changeKeyFields) {
 	const text = changeKeyField.getElementsByClassName('text')[0];
 	
 	// Initialise la valeur du text a la valeur actuelle
-	text.innerHTML = game.keys[changeKeyField.id] + ' 📝';
+	text.innerHTML = game.settings.keys[changeKeyField.id] + ' 📝';
 	text.onclick = function () {
 		// Affiche "waiting ..." en attendant l'entree de l'utilisateur
 		text.innerHTML = "Waiting ..."
@@ -226,7 +224,7 @@ for (let changeKeyField of changeKeyFields) {
 
 	// Remets les valeurs par defaut quand le bouton est appuye
 	switchDefaultButton.onclick = function () {
-		const defaultKey = defaultKeys[changeKeyField.id];
+		const defaultKey = game.settings.keys.default[changeKeyField.id];
 
 		game.updatekey(changeKeyField.id, defaultKey);
 		text.innerHTML = defaultKey + ' 📝';
