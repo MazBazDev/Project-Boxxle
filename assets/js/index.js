@@ -283,3 +283,11 @@ export function playSound(sound) {
 	audio.volume = game.settings.volume
 	audio.play();
 }
+
+window.addEventListener("beforeunload", function(event) {
+	// Afficher la boîte de dialogue
+	event.preventDefault();
+	event.returnValue = "";
+	return "";
+  });
+  
