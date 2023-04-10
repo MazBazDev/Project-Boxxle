@@ -292,10 +292,11 @@ export function playSound(sound) {
 function saveSettings() {
 	localStorage.setItem("settings", JSON.stringify(game.settings));
 }
-// window.addEventListener("beforeunload", function(event) {
-// 	// Afficher la boîte de dialogue
-// 	event.preventDefault();
-// 	event.returnValue = "";
-// 	return "";
-//   });
+
+window.addEventListener("beforeunload", function(event) {
+	// Afficher la boîte de dialogue
+	event.preventDefault();
+	event.returnValue = "";
+	return "";
+  });
   
