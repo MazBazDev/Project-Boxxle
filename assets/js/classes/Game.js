@@ -40,7 +40,7 @@ export class Game {
 		Levels.forEach((Level) => {
 			var map = [];
 			for (let row of Level) map.push([...row]);
-			if (map.some((row) => row.includes(2))) {
+			if (map.some((row) => row.includes(3))) {
 				this.maps.push([...map]);
 			} else {
 				mapRemoved++
