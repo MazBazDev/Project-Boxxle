@@ -30,13 +30,18 @@ button:hover {
 
 body {
 	margin: 0;
-	background: #333333;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
 	font-family: "Chivo", sans-serif;
 	color: #ffffff;
+	background: linear-gradient(316deg, #3d91c1, #9ab0dd, #5783e1, #57e1b1);
+    background-size: 800% 800%;
+
+    -webkit-animation: AnimationName 24s ease infinite;
+    -moz-animation: AnimationName 24s ease infinite;
+    animation: AnimationName 24s ease infinite;
 }
 
 #gameboard {
@@ -45,8 +50,26 @@ body {
 	grid-template-rows: repeat(10, 4vw);
 	background-image: url("/assets/img/floor.png");
 	background-size: 50px;
+	border-radius: 10px;
+	border: 8px solid #4a4a4a;
 }
 
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 43%}
+    50%{background-position:100% 58%}
+    100%{background-position:0% 43%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 43%}
+    50%{background-position:100% 58%}
+    100%{background-position:0% 43%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 43%}
+    50%{background-position:100% 58%}
+    100%{background-position:0% 43%}
+}
 #gameboard>div {
 	height: 4vw;
 	width: 4vw;
