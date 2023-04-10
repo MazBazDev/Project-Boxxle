@@ -1,6 +1,5 @@
 import { Levels } from "../levels.js";
-import { addBlock, character, game } from "../index.js";
-import { Character } from "./Character.js";
+import { addBlock, character} from "../index.js";
 
 export class Game {
 	level;
@@ -18,21 +17,28 @@ export class Game {
 		left: 'arrowleft',
 	};
 
-	constructor(level = 0) {
+	constructor(level = 0, reset = false) {
 		this.level = level;
-		this.sortMaps();
+		this.sortMaps(reset);
 		this.initRound();
 	}
 
 	// On retire les maps qui ne contienne pas de boites
-	sortMaps() {
+	sortMaps(reset) {
+		let mapRemoved = 0;
 		Levels.forEach((Level) => {
 			var map = [];
 			for (let row of Level) map.push([...row]);
 			if (map.some((row) => row.includes(2))) {
 				this.maps.push([...map]);
+			} else {
+				mapRemoved++
 			}
 		});
+
+		if(mapRemoved && !reset) {
+			Notiflix.Notify.failure(`${mapRemoved} map was removed !`)
+		}
 	}
 
 	initRound() {
@@ -57,16 +63,20 @@ export class Game {
 	}
 
 	changeMap() {
-		if (
-			document.querySelectorAll(".good").length == this.targets.length &&
-			this.level < this.maps.length
-		) {
+		if (document.querySelectorAll(".good").length == this.targets.length && this.level < this.maps.length) {
 			this.map = [];
 			this.targets = [];
 			this.level++;
 			this.initRound();
-		} else if (this.level == this.maps.length) {
-			alert(`You won, with ${character.steps}`);
+		} 
+		
+
+		if (this.level == this.maps.length) {
+			Notiflix.Report.success(
+				'GG !',
+				`You finished all levels, in ${character.steps} steps`,
+				'Restart !',
+			);
 		}
 	}
 

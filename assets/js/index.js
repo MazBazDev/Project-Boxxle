@@ -1,7 +1,6 @@
 // On charge les class Personnage et Partie
 import { Character } from "./classes/Character.js";
 import { Game } from "./classes/Game.js";
-
 // Paramettres par defauts
 const defaultKeys = {
 	up: 'arrowup',
@@ -178,7 +177,7 @@ export function addBlock(type) {
 }
 
 document.getElementById("reset").addEventListener("click", () => {
-  game = new Game(game.level);
+  game = new Game(game.level, true);
 });
 
 requestAnimationFrame(render);
@@ -236,6 +235,7 @@ for (let changeKeyField of changeKeyFields) {
 
 }
 
+// Mise à jour du volume en fonction de l'input
 const volumeInput = document.querySelector("input[type=range]")
 volumeInput.addEventListener("input", (event) => {
 	document.getElementById("volumeOut").innerHTML= Math.round(volumeInput.value * 100 ) + "%"
@@ -246,6 +246,7 @@ volumeInput.addEventListener("input", (event) => {
 span.onclick = function () {
 	// Cacher les parametres
 	modal.style.display = "none";
+	Notiflix.Notify.success('Settings saved !')
 };
 
 // Quand on clique ailleurs que sur le modal
