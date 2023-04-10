@@ -5,80 +5,95 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Boxxle</title>
+    <title>The Boxxle</title>
+    <link rel="icon" type="image/png" href="./assets/img/good_crate.png" />
     <link rel="stylesheet" href="/assets/css/styles.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
     
 </body>
 <body>
-    <!-- Bouton parametres -->
-    <button id="settingsButton">Open settings</button>
+    <div class="">
+       <div class="game-header">
+            <div>
+                <!-- Bouton parametres -->
+                <button id="settingsButton"><ion-icon name="settings-outline"></ion-icon> Settings</button>
 
+                <!-- reset btn -->
+                <button id="reset"><ion-icon name="refresh-outline"></ion-icon> Reset</button>
+            </div>
+
+            <!-- Compteur de pas -->
+            <span class="steps"><ion-icon name="footsteps-outline"></ion-icon><span id="steps_count"></span></span>
+       </div>
+        <!-- Jeu -->
+        <div id="gameboard"></div>
+    </div>
+    
     <!-- Parametres -->
     <div id="settings" class="modal-background">
         <div class="modal">
             <div class="modal-header">
-                <h1>Settings</h1>
+                <h1><ion-icon name="settings-outline"></ion-icon>  Settings</h1>
                 <span class="close">&times;</span>
             </div>
-            <hr>
             <div class="modal-content">
                 <div id="keys" class="modal-sub_content">
                     <h2>Keys</h2>
                     <div class="change-key" id="up">
-                        <h4>Top:</h4>
+                        <h4><ion-icon name="arrow-up-outline"></ion-icon></h4>
                         <p class="text"></p>
-                        <button class="defaultButton">default</button>
+                        <button class="defaultButton">Reset </button>
                     </div>
                     <div class="change-key" id="left">
-                        <h4>Left:</h4>
+                        <h4><ion-icon name="arrow-back-outline"></ion-icon></h4>
                         <p class="text"></p>
-                        <button class="defaultButton">default</button>
+                        <button class="defaultButton">Reset </button>
                     </div>
                     <div class="change-key" id="down">
-                        <h4>Bottom:</h4>
+                        <h4><ion-icon name="arrow-down-outline"></ion-icon></h4>
                         <p class="text"></p>
-                        <button class="defaultButton">default</button>
+                        <button class="defaultButton">Reset </button>
                     </div>
                     <div class="change-key" id="right">
-                        <h4>Right:</h4>
+                        <h4><ion-icon name="arrow-forward-outline"></ion-icon></h4>
                         <p class="text"></p>
-                        <button class="defaultButton">default</button>
+                        <button class="defaultButton">Reset </button>
+                    </div>
+                    <div id="volume">
+                        <ion-icon name="volume-high-outline"></ion-icon>
+                        <input type="range" name="" id="" min="0" max="1" step="0.01" value="1">
+                        <span id="volumeOut">100%</span>
                     </div>
                 </div>
                 <div id="skin" class="modal-sub_content">
                     <h2>Skin</h2>
-                    <div class="carousel">
-                        <a class="prev">&#10094;</a>
-                        <div class="carousel-window">
-                            <div class="carousel-slide">
-                              <img src="./assets/img/character/0/down/0.png" alt="Image 0">
-                              <img src="./assets/img/character/1/down/0.png" alt="Image 1">
-                              <img src="./assets/img/character/2/down/0.png" alt="Image 2">
-                              <img src="./assets/img/character/3/down/0.png" alt="Image 3">
-                              <img src="./assets/img/character/4/down/0.png" alt="Image 4">
+                    <div class="align-center">
+                        <div>
+                            <div class="carousel">
+                                <a class="prev">&#10094;</a>
+                                <div class="carousel-window">
+                                    <div class="carousel-slide">
+                                      <img src="./assets/img/character/0/down/0.png">
+                                    </div>
+                                </div>
+                                <a class="next">&#10095;</a>
                             </div>
                         </div>
-                        <a class="next">&#10095;</a>
                     </div>
-                    <div class="modal_sub-content_footer">
-                        <button class="choose-character">choose</button>
-                    </div>
+                </div>
+                <div class="footer">
+                    <h4>Boxxle by <a href="https://github.com/PommeDAPI7749">Mayeul</a> & <a href="https://github.com/MazBazDev">Mazigh</a></h4>
+                    <hr>
+                    <p>Assets from <a href="https://kenney.nl/">Kenney.nl</a></p>
                 </div>
             </div>
           </div>
     </div>
 
-    <!-- reset btn -->
-    <button id="reset">Reset</button>
-    <!-- Compteur de pas -->
-    <div id="steps_count"></div>
-
-    <!-- Jeu -->
-    <div id="gameboard"></div>
-
-    <!-- Chargement des scripts -->
+     <!-- Chargement des scripts -->
     <script type="module" src="/assets/js/index.js"></script>
     <script type="module" src="/assets/js/levels.js"></script>
 </body>

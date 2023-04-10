@@ -7,7 +7,7 @@ body {
 
 /* Button container */
 button {
-	display: inline-block;
+	display: flex;
 	padding: 8px 16px;
 	background-color: #212121;
 	color: #fff;
@@ -19,13 +19,14 @@ button {
 	line-height: 24px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	gap: 10px;
 }
   
 /* Button hover state */
 button:hover {
 	background-color: #424242;
 }
-  
+
 
 body {
 	margin: 0;
@@ -82,34 +83,42 @@ body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.863);
 }
+ 
 
 .modal {
 	font-family: "Chivo", sans-serif;
 	background-color: #292929;
-	padding: 20px;
+	padding: 10px;
 	border: 1px solid #2d2d2d;
-	width: 70%;
-	height: 70%;
-	overflow: auto;
+	border-radius: 20px;
+	margin: 60px;
 }
 
 .modal-header {
 	display: flex;
-	padding-left: 5%;
-	padding-right: 5%;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
 }
 
 /* Contenu du modal */
 .modal-content {
-	padding-left: 5%;
-	padding-right: 5%;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	gap: 20px;
+	max-width: 100%;
+	padding: 30px;
 }
-
+.modal-content > div {
+	border: solid 1px #ffffff;
+	border-radius: 10px;
+	padding: 20px;
+}
 .change-key {
 	display: flex;
 	flex-direction: row;
@@ -123,8 +132,32 @@ body {
 	width: 15%;
 }
 
+#volume {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 10px;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+ion-icon {
+	font-size: 1.4rem;
+}
+
+.text {
+	border: solid 1px wheat;
+	padding: 10px;
+	border-radius: 10px;
+}
+
 .text:hover {
-	cursor: pointer;
+	cursor:context-menu;
+	background-color: #ffffff;
+	color: #212121;
+	transition: all .3s ease-in-out;
 }
 
 .defaultButton {
@@ -134,14 +167,14 @@ body {
 
 /* Bouton de fermeture */
 .close {
-	color: #FF4500;
+	color: #ffffff;
 	float: right;
-	font-size: 28px;
+	font-size: 2.5rem;
 	font-weight: bold;
 }
 .close:hover,
 .close:focus {
-	color: #8B0000;
+	color: #ed1818;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -217,4 +250,39 @@ body {
   
 ::-webkit-scrollbar-thumb:hover {
 	background: rgba(0, 0, 0, 0.5);
+}
+
+.game-header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 30px;
+}
+.game-header > div {
+	display: flex;
+	gap: 1rem;
+}
+.steps {
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+.steps > span {
+	margin-left: 10px;
+}
+
+.footer {
+	grid-column: span 2; 
+	text-align: center;
+}
+
+.footer a {
+	color: #ffffff;
+}
+
+.align-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80%;
 }
