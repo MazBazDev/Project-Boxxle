@@ -9,6 +9,9 @@ const grid = document.getElementById("gameboard");
 export let character = new Character();
 export let game = new Game(0);
 
+if (localStorage.getItem("settings")) {
+	game.settings = JSON.parse(localStorage.getItem("settings"));
+}
 // Quand une touche est pressee
 document.addEventListener(
 	"keydown",
@@ -245,6 +248,7 @@ span.onclick = function () {
 	// Cacher les parametres
 	modal.style.display = "none";
 	Notiflix.Notify.success('Settings saved !')
+	saveSettings()
 };
 
 // Quand on clique ailleurs que sur le modal
@@ -284,10 +288,14 @@ export function playSound(sound) {
 	audio.play();
 }
 
-window.addEventListener("beforeunload", function(event) {
-	// Afficher la boîte de dialogue
-	event.preventDefault();
-	event.returnValue = "";
-	return "";
-  });
+
+function saveSettings() {
+	localStorage.setItem("settings", JSON.stringify(game.settings));
+}
+// window.addEventListener("beforeunload", function(event) {
+// 	// Afficher la boîte de dialogue
+// 	event.preventDefault();
+// 	event.returnValue = "";
+// 	return "";
+//   });
   
