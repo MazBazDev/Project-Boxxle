@@ -239,8 +239,13 @@ for (let changeKeyField of changeKeyFields) {
 
 // Mise à jour du volume en fonction de l'input
 const volumeInput = document.querySelector("input[type=range]")
+const volumeOutput = document.getElementById("volumeOut");
+
+volumeInput.value = game.settings.volume 
+volumeOutput.innerHTML = (game.settings.volume * 100 ) + "%"
+
 volumeInput.addEventListener("input", (event) => {
-	document.getElementById("volumeOut").innerHTML= Math.round(volumeInput.value * 100 ) + "%"
+	volumeOutput.innerHTML= Math.round(volumeInput.value * 100 ) + "%"
 	game.settings.volume = volumeInput.value
 })
 
