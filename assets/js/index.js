@@ -307,3 +307,15 @@ window.addEventListener("beforeunload", function(event) {
 	return "";
   });
   
+let konamiCode = []; // Tableau pour stocker les touches pressées
+const konamiSequence = ["arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a"]; // Séquence de touches à détecter
+
+function konamiCodeDetector(event) {
+  konamiCode.push(event.key.toLowerCase()); // Ajoute la touche pressée au tableau
+  konamiCode.splice(-konamiSequence.length - 1, konamiCode.length - konamiSequence.length); // Supprime les touches en trop
+  
+  if (konamiCode.join() === konamiSequence.join()) { // Vérifie si la séquence est complète
+	window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+  }
+}
+document.addEventListener("keydown", konamiCodeDetector); 
