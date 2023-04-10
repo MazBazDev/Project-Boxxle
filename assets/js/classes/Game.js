@@ -1,5 +1,5 @@
 import { Levels } from "../levels.js";
-import { addBlock, character, restart} from "../index.js";
+import { addBlock, character, restart, playSound} from "../index.js";
 
 export class Game {
 	level;
@@ -79,6 +79,7 @@ export class Game {
 			this.targets = [];
 			this.level++;
 			this.initRound();
+			playSound("nextLevel")
 		} 
 		
 
@@ -88,6 +89,7 @@ export class Game {
 				`You finished all levels, in ${character.steps} steps`,
 				'Restart !',
 			);
+			playSound("win")
 			restart()
 		}
 	}

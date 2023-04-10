@@ -1,4 +1,4 @@
-import { game } from "../index.js";
+import { game, playSound } from "../index.js";
 
 export class Character {
 	type;
@@ -45,7 +45,7 @@ export class Character {
 		// On deplace le personnage, incremente le compteur de pas et joue un bruit de pas
 		this.setPosition([y - 1, x]);
 		this.steps++;
-		this.walkSound();
+		playSound("footStep");
 	}
 
 	async goDown(map) {
@@ -62,7 +62,7 @@ export class Character {
 		// On deplace le personnage, incremente le compteur de pas et joue un bruit de pas
 		this.setPosition([y + 1, x]);
 		this.steps++;
-		this.walkSound();
+		playSound("footStep");
 
 	}
 
@@ -80,7 +80,7 @@ export class Character {
 		// On deplace le personnage, incremente le compteur de pas et joue un bruit de pas
 		this.setPosition([y, x - 1]);
 		this.steps++;
-		this.walkSound();
+		playSound("footStep");
 
 	}
 
@@ -98,8 +98,7 @@ export class Character {
 		// On deplace le personnage, incremente le compteur de pas et joue un bruit de pas
 		this.setPosition([y, x + 1]);
 		this.steps++;
-		this.walkSound();
-
+		playSound("footStep");
 	}
 
 	async moveBox(map, verical, horizontal) {
@@ -146,13 +145,5 @@ export class Character {
 				this.state = 2;
 			}
 		}
-	}
-
-	// On joue un son de pas
-	walkSound() {
-		const audio = new Audio("/assets/sounds/footStep.mp3");
-		audio.loop = false;
-		audio.volume = game.settings.volume
-		audio.play();
 	}
 }

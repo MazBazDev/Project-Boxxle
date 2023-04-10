@@ -276,3 +276,10 @@ export function nextSlide() {
 // Add event listeners to the prev/next buttons
 document.querySelector('.prev').addEventListener('click', prevSlide);
 document.querySelector('.next').addEventListener('click', nextSlide);
+
+export function playSound(sound) {
+	const audio = new Audio(`/assets/sounds/${sound}.mp3`);
+	audio.loop = false;
+	audio.volume = game.settings.volume
+	audio.play();
+}
