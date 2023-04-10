@@ -11,6 +11,7 @@ export let game = new Game(0);
 
 if (localStorage.getItem("settings")) {
 	game.settings = JSON.parse(localStorage.getItem("settings"));
+	character.type = localStorage.getItem("character");
 }
 // Quand une touche est pressee
 document.addEventListener(
@@ -291,6 +292,7 @@ export function playSound(sound) {
 
 function saveSettings() {
 	localStorage.setItem("settings", JSON.stringify(game.settings));
+	localStorage.setItem("character", character.type);
 }
 
 window.addEventListener("beforeunload", function(event) {
