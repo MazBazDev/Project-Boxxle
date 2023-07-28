@@ -1,7 +1,9 @@
 import { Levels } from "../levels.js";
-import { addBlock, character, restart, playSound} from "../index.js";
+import { addBlock, character, restart, playSound, stats} from "../index.js";
 
 export class Game {
+	getKeys = false;
+	pseudo = "";
 	level;
 	lastRenderTime = 0;
 	maps = [];
@@ -90,6 +92,7 @@ export class Game {
 				'Restart !',
 			);
 			playSound("win")
+			stats.setDatas()
 			restart()
 		}
 	}

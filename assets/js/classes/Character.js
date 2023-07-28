@@ -1,4 +1,4 @@
-import { game, playSound } from "../index.js";
+import { game, playSound, stats } from "../index.js";
 
 export class Character {
 	type;

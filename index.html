@@ -15,21 +15,34 @@
     
 </body>
 <body>
-    <div class="">
-       <div class="game-header">
-            <div>
-                <!-- Bouton parametres -->
-                <button id="settingsButton"><ion-icon name="settings-outline"></ion-icon> Settings</button>
-
-                <!-- reset btn -->
-                <button id="reset"><ion-icon name="refresh-outline"></ion-icon> Reset</button>
+    <div class="grid">
+        <div class="game">
+            <div class="">
+                <div class="game-header">
+                    <div>
+                        <!-- Bouton parametres -->
+                        <button id="settingsButton"><ion-icon name="settings-outline"></ion-icon> Settings</button>
+        
+                        <!-- reset btn -->
+                        <button id="reset"><ion-icon name="refresh-outline"></ion-icon> Reset</button>
+                    </div>
+        
+                    <!-- Compteur de pas -->
+                    <span class="steps"><ion-icon name="footsteps-outline"></ion-icon><span id="steps_count"></span></span>
+                </div>
+                <!-- Jeu -->
+                <div id="gameboard"></div>  
             </div>
-
-            <!-- Compteur de pas -->
-            <span class="steps"><ion-icon name="footsteps-outline"></ion-icon><span id="steps_count"></span></span>
-       </div>
-        <!-- Jeu -->
-        <div id="gameboard"></div>
+         </div>
+         <div>
+            <table id="stats">
+                <tr>
+                  <th>Player</th>
+                  <th>Steps</th>
+                  <th>Date</th>
+                </tr>
+              </table>
+         </div>
     </div>
     
     <!-- Parametres -->
@@ -92,11 +105,12 @@
             </div>
           </div>
     </div>
-
+    
      <!-- Chargement des scripts -->
     <script type="module" src="/assets/js/index.js"></script>
     <script type="module" src="/assets/js/levels.js"></script>
     <script src="./assets/vendor/notiflix/notiflix-notify-aio-3.2.6.min.js"></script>
     <script src="./assets/vendor/notiflix/notiflix-report-aio-3.2.6.min.js"></script>
+    <script src="./assets/vendor/notiflix/notiflix-confirm-aio-3.2.6.min.js"></script>
 </body>
 </html>
